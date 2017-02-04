@@ -1,11 +1,24 @@
-var xports = require('./config/connection.js');
+//DataTypes is coming from SQL database, used to configure model for table.
 
-
-
- // create the code that will call the ORM or query functions using burger specific input for the ORM 
- // or query functions.
-
-//export module to burgers_controllers.js
- module.exports = {
-
+module.exports = function(sequelize, DataTypes) {
+    var Burgers = sequelize.define("burgers", {
+        burger_name: {
+            type: Datatypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
+        },
+        devoured: {
+            type: Datatypes.BOOLEAN,
+            defaultValue: false
+        },
+        id: {
+            type: Datatypes.INTEGER,
+            timestamps: true,
+            autoIncrement: true,
+            primaryKey: true
+        }
+    });
+    return Burgers;
 }
